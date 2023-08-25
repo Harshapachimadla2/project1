@@ -1,0 +1,26 @@
+---
+- hosts: all
+  user: root
+  tasks:
+    - name: download tomcat
+      get_url:
+        url: https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.92/bin/apache-tomcat-8.5.92.tar.gz
+        dest: /opt
+    - name: extract
+      unarchive:
+        src: /opt/apache-tomcat-8.5.92.tar.gz
+        dest: /opt
+        remote_src: yes
+    - name: providing permission
+      file:
+        path: /opt/apache-tomcat-8.5.92/bin/startup.sh
+        mode: 0777
+    - name: start tomcat service
+      shell: nohup ./startup.sh
+      args:
+        chdir: /opt/apache-tomcat-8.5.92/bin
+    - name: download a war file 
+      get_url:
+        url: https://tomcat.apache.org/tomcat-7.0-doc/appdev/sample/sample.war
+        dest: /opt/apache-tomcat-8.5.92/tomcat.war
+                                                           

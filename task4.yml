@@ -1,0 +1,11 @@
+---
+- hosts: all
+  user: root
+  tasks:
+    - name: buildin mvn
+      shell: mvn -f /root/project1/pom.xml clean
+    - name: permission
+      file:
+         path: /root/project1/
+         mode: 0777
+      

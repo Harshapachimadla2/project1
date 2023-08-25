@@ -1,0 +1,10 @@
+---
+- hosts: all
+  user: root
+  tasks:
+    - name: Clone ioor Pull the Git repository
+      git:
+        repo: https://github.com/Harshapachimadla2/project1.git
+        dest: /root/project1
+        version: main
+        update: yes
